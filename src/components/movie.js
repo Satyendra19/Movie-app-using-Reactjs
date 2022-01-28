@@ -2,15 +2,11 @@ import React from 'react';
 
 const MovieList = (props) => {
 	const FavouriteComponent = props.favouriteComponent;
-	let myStyle={
-		color : 'white',
-		backgroundColor : 'black',
-		display : 'flex'
-	}
+	
 	return (
-		<div style={myStyle}>
+		<div className='movie'>
 			{props.movies.map((movie) => (
-				<div>
+				<li>
 					<h3>{movie.Title}</h3>
 					<p>
 						{movie.Year}
@@ -23,7 +19,7 @@ const MovieList = (props) => {
 						onClick={() => props.handleFavouritesClick(movie)}>
 						<FavouriteComponent />
 					</div>
-				</div>
+				</li>
 			))}
 		</div>
 	);

@@ -45,7 +45,7 @@ const App = () => {
 				
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
 			</div>
-			<div className='row'>
+			<div className='movies'>
 				<MovieList
 					movies={movies}
 					handleFavouritesClick={addFavouriteMovie}
