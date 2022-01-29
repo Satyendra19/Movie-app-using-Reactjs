@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import MovieList from './components/movie';
-import MovieListHeading from './components/heading';
+import Heading from './components/heading';
 import SearchBox from './components/Search';
-import AddFavourites from './components/Addfavourites';
 import RemoveFavourites from './components/RemoveFavourites';
 // **********************************************************************Concept of save To Local Storage
 const App = () => {
@@ -25,10 +24,17 @@ const App = () => {
 	useEffect(() => {
 		getMovieRequest(searchValue);
 	}, [searchValue]);
+
 	const addFavouriteMovie = (movie) => {
-		const newFavouriteList = [...favourites, movie];
+		let newFavouriteList = favourites.filter(
+			(favourite) => favourite.imdbID !== movie.imdbID)
+	 	newFavouriteList = [...newFavouriteList, movie];
 		setFavourites(newFavouriteList);
 	};
+	// const disabled =(movie) =>{
+	// 	let exist=setMovies.find(o=>o.imdbID===movie.imdbID);
+	// 	return exist;
+	// }
 
 	const removeFavouriteMovie = (movie) => {
 		const newFavouriteList = favourites.filter(
@@ -40,27 +46,18 @@ const App = () => {
 
 	return (
 		<div className='App'>
-			<div className='App-header'>
-				<MovieListHeading heading='Movies' />
-				
+				<Heading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
-			</div>
 			<div className='movies'>
-				<MovieList
-					movies={movies}
+				<MovieList movies={movies}
 					handleFavouritesClick={addFavouriteMovie}
-					favouriteComponent={AddFavourites}
+					favouriteComponent={()=><button>Add to WatchList</button>}
 				/>
 			</div>
-			<div className='App-header'>
-			<MovieListHeading heading='WatchList' />
-			</div>
-			<br></br>
 			<div className='row'>
-				<MovieList
-					movies={favourites}
+				<MovieList movies={favourites}
 					handleFavouritesClick={removeFavouriteMovie}
-					favouriteComponent={RemoveFavourites}
+					favouriteComponent={()=><button>Remove from WatchList</button>}
 				/>
 			</div>
 		</div>

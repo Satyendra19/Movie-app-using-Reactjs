@@ -1,9 +1,10 @@
 import React from 'react'
 
-const Heading = (params) => {
+const Heading = () => {
     return (
-        <div>
-            <h1>{params.heading}</h1>
+        <div className='App-header'>
+           <h3>Movies</h3>
+
         </div>
     )
 }
